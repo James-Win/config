@@ -110,19 +110,14 @@ endsnippet
 
 
 
-snippet mk "Math" wA
-$${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2
+snippet qmk "Math" wA
+$${1}$ $0
 endsnippet
 
-snippet dm "Math" wA
+snippet qdm "Math" wA
 \[
 ${1:${VISUAL}}
-.\] $0
+\] $0
 endsnippet
 
 snippet ali "Align" bA
@@ -620,6 +615,10 @@ snippet "bar" "bar" riA
 \overline{$1}$0
 endsnippet
 
+
+
+
+
 priority 100
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
@@ -643,6 +642,17 @@ snippet "([a-zA-Z])vec" "Vector notation" riA
 \vec{`!p snip.rv=match.group(1)`}
 endsnippet
 
+context "math()"
+snippet "([a-zA-Z])ddot" "Double dot notation" riA
+\ddot{`!p snip.rv=match.group(1)`}
+endsnippet
+
+
+
+
+
+
+
 #snippet letw "let omega" iA
 #Let $\Omega \subset \C$ be open.
 #endsnippet
@@ -657,18 +667,12 @@ snippet DD "D" iA
 endsnippet
 
 
-context "math_mode()"
-snippet "([a-zA-Z])ddot" "Double dot notation" riA
-\ddot{`!p snip.rv=match.group(1)`}
-endsnippet
-
-
-context "math_mode()"
+context "math()"
 snippet "([a-zA-Z])tilde" "Tilde notation" riA
 \tilde{`!p snip.rv=match.group(1)`}
 endsnippet
 
-context "math_mode()"
+context "math()"
 snippet "([a-zA-Z])und" "Underline notation" riA
 \underline{`!p snip.rv=match.group(1)`}
 endsnippet

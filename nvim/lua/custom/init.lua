@@ -1,6 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-vim.opt.guifont = { "JetBrainsMono Nerd Font", "h14" }
+vim.opt.guifont = { "JetBrainsMono Nerd Font", "h12" }
 local enable_providers = {
     "python3_provider",
     "node_provider",
@@ -19,6 +19,16 @@ local enable_providers = {
 --
 vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/nvim/lua/custom/snippets/snippets.lua"
 
+-- Noice
+vim.api.nvim_set_keymap("n", "<leader>nd", ":NoiceDismiss<CR>", {noremap=true})
+
+vim.keymap.set("n", "<leader>ee", "<cmd>GoIfErr<cr>",
+  {silent = true, noremap = true}
+)
+
+
+
+
 vim.cmd[[
 " Use Tab to expand and jump through snippets
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
@@ -29,3 +39,14 @@ imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 ]]
 
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
